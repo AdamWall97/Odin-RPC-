@@ -1,5 +1,5 @@
 
-function game(ps){
+/*function game(ps){
 var wins = 0;
 var loss = 0;
 var ties = 0;
@@ -22,46 +22,56 @@ for(let i = 0; i < 15;i++){
 }
 
 return "Your record is: "+wins+"-"+loss+"-"+ties;
-}
+}*/
 
 
-function playRound(playerSelection, computerSelection){
+let wins = 0;
+let loss = 0;
+let ties = 0;
+
+function playRound(e,playerSelection, computerSelection){
 //tie
 if (playerSelection == computerSelection){
-    return "Tie! Both chose " + playerSelection
+    ties = ties + 1 
 }
 
     //Rock games
     if (playerSelection == "rock"){
         if (computerSelection == "paper")
         {
-            return "You Lose! " + computerSelection+ " beats "+ playerSelection;
+            loss = loss + 1;
+            // console.log( "You Lose! " + computerSelection+ " beats "+ playerSelection);
         }
         if (computerSelection == "scissors")
         {
-            return "You Win! " + playerSelection+ " beats "+ computerSelection;
+            wins = wins + 1;
+            //console.log("You Win! " + playerSelection+ " beats "+ computerSelection);
         }
     }
     //Paper Games
     if (playerSelection == "paper"){
         if (computerSelection == "scissors")
         {
-            return "You Lose! " + computerSelection+ " beats "+ playerSelection;
+            loss = loss + 1;
+            //return "You Lose! " + computerSelection+ " beats "+ playerSelection;
         }
         if (computerSelection == "rock")
         {
-            return "You Win! " + playerSelection+ " beats "+ computerSelection;
+            wins = wins + 1;
+            //return "You Win! " + playerSelection+ " beats "+ computerSelection;
         }
     }
     //Scissor Games
     if (playerSelection == "scissors"){
         if (computerSelection == "rock")
         {
-            return "You Lose! " + computerSelection+ " beats "+ playerSelection;
+            loss = loss + 1;
+            //return "You Lose! " + computerSelection+ " beats "+ playerSelection;
         }
         if (computerSelection == "paper")
         {
-            return "You Win! " + playerSelection+ " beats "+ computerSelection;
+            wins = wins + 1;
+            //return "You Win! " + playerSelection+ " beats "+ computerSelection;
         }
     }
 return 0;
@@ -87,6 +97,59 @@ function computerPlay(){
 
 }
 
+
+
+
+function Userinput(sty){
+    alert(sty);
+}
+
+const rock = document.querySelector('#rock');
+const paper = document.querySelector('#paper');
+const scis = document.querySelector('#scis');
+
+
+
+
+
+
+const container = document.querySelector('#container')
+
+const content = document.createElement('div');
+
+content.classList.add('content');
+content.textContent = "Your Record is: ";
+
+container.appendChild(content);
+
+rock.addEventListener('click', function (e) {
+    playRound(e,'rock',computerPlay());
+content.textContent = "Your Record is: " + wins + "-" + loss + "-" + ties;
+    container.appendChild(content);
+});
+
+
+paper.addEventListener('click', function (e) {
+    playRound(e,'paper',computerPlay());
+    content.textContent = "Your Record is: " + wins + "-" + loss + "-" + ties;
+    container.appendChild(content);
+});
+
+
+scis.addEventListener('click', function (e) {
+    playRound(e,'scissors',computerPlay());
+    content.textContent = "Your Record is: " + wins + "-" + loss + "-" + ties;
+    container.appendChild(content);
+});
+
+
+
+//paper.addEventListener('click', playRound("paper", computerPlay()));
+
+//scis.addEventListener('click', console.log(playRound("scissors", computerPlay())));
+
 //log game
-const playerSelection = window.prompt("Rock, Paper, Scissors!");
-console.log(game(playerSelection));
+//const playerSelection = window.prompt("Rock, Paper, Scissors!");
+
+
+
